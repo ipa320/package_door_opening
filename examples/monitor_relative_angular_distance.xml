@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pitasc>
+    <models>
+        <!-- Include pitasc -->
+        <include package="pitasc_library" file="models/pitasc.xml"/>
+
+        <!-- Include the UR5 -->
+        <include package="pitasc_library" file="universal_robots/ur.xml"/>
+
+        <!-- Include the skills -->
+        <include package="pitasc_library" file="models/skills.xml"/>
+
+        <include package="pitasc_pivot_taubin" file="monitors/monitor_relative_angular_distance.xml"/>   
+        
+    </models>
+
+    <!-- Create a project -->
+    <clone prototype="project">
+
+        <member id="configuration">
+            <!-- Use the default configuration with recommended settings -->
+            <clone id="configuration" prototype="default_configuration"/>
+        </member>
+
+        <member id="environment">
+            <!-- Add a UR5 -->
+            <clone prototype="robot_ur5">
+                <member id="robot_driver.max_velocity">2.0</member>
+                <member id="robot_driver.max_acceleration">3.0</member>
+                <member id="components">
+                    <clone prototype="force_sensor">
+                        <member id="wrench_topic">wrench</member>
+                    </clone>
+                </member>
+            </clone>
+        </member>
+        
+        <member id="applications">
+            
+            <clone prototype="skill_sequence">
+                <member id="robot" reference_id="environment.robot_ur5"/>
+                <member id="skills">
+
+                    <!-- Move to staring position -->
+                    <clone prototype="skill_lin">
+                        <member id="tool_frame">tool</member>
+                        <member id="target_frame">target1</member>
+                        <member id="target_offsets">0.0, -0.15, 0.0, 0.0, 0, 0.0</member>
+                    </clone>
+
+                    <!-- Rotate around target1s z axis -->
+                    <clone prototype="skill_cylindrical_velocity">
+                        <member id="tool_frame">tool</member>
+                        <member id="target_frame">target1</member>
+                        <member id="velocities">0, 0.1, 0, 0, 0, 0</member>
+                        <member id="monitors">
+                            <clone prototype="monitor_relative_angular_distance">
+                                <member id="reference_frame">target1</member>
+                                <member id="frame">tool</member>
+                                <member id="coordinates">c</member>
+                                <member id="distances">1.57</member>
+                                <member id="operator">absolute_greater</member>
+                            </clone>
+                        </member>
+                    </clone>
+                </member>
+            </clone>
+        </member>
+    </clone>
+</pitasc>

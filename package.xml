@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>pitasc_pivot_taubin</name>
+  <version>1.0.0</version>
+  <description>The pitasc_pivot_taubin package</description>
+
+  <maintainer email="marcel.jenisch@ipa.fraunhofer.de">Marcel Jenisch</maintainer>
+
+  <license>Other</license>
+
+  <url type="website">http://www.ipa.fraunhofer.de/</url>
+
+  <author email="marcel.jenisch@ipa.fraunhofer.de">Marcel Jenisch</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>cppitasc</depend>
+  <exec_depend>pitasc_library</exec_depend>
+
+  <export>
+  </export>
+
+</package>

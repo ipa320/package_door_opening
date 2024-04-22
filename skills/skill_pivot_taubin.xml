@@ -1,0 +1,199 @@
+<pitasc>
+    <models>
+        <include package="pitasc_library" file="models/pitasc.xml"/>
+        <include package="pitasc_library" file="models/coordination.xml"/>
+        <include package="pitasc_library" file="skills/cylindrical/skill_cylindrical_velocity.xml"/>
+
+        <include package="pitasc_pivot_taubin" file="monitors/monitor_relative_angular_distance.xml"/>
+        <include package="pitasc_pivot_taubin" file="scripts/script_temp_frame_offset.xml"/>  
+        <include package="pitasc_pivot_taubin" file="scripts/script_temp_frame_from_taubin.xml"/>  
+
+        <type id="skill_pivot_taubin" prototype="skill_concurrency">
+            <meta>
+                <member id="description">Rotates around pivot while adjusting it's position after initial arch</member>
+                <member id="visibility">basic</member>
+            </meta>
+
+            <data>
+                <type id="tool_frame" prototype="frame">
+                    <meta>
+                        <member id="description">Name of the tool frame</member>
+                        <member id="visibility">required</member>
+                    </meta>
+                </type>
+
+                <type id="parent_frame" prototype="frame">
+                    <meta>
+                        <member id="description">Name the parent frame</member>
+                        <member id="visibility">required</member>
+                    </meta>
+                </type>
+
+                <type id="source_frame" prototype="frame">
+                    <meta>
+                        <member id="description">Name of the source frame, initial position of the pivot point frame</member>
+                        <member id="visibility">required</member>
+                    </meta>
+                </type>
+                <!-- <reference id="source_frame" prototype="frame" reference_id="tool_frame"/> Does not work-->
+
+                <type id="offset" prototype="float_csv">
+                    <meta>
+                        <member id="description">Offset pivot point from 'source_frame', x, y, z, a, b, c in [m] resp. [rad]</member>
+                        <member id="visibility">basic</member>
+                    </meta>
+                    <data>0.0, 0.0, 0.0, 0.0, 0.0, 0.0</data>
+                </type>
+
+                <!-- forces -->
+                <type id="force_axes" prototype="string_csv">
+                    <meta>
+                        <member id="description">List of axes.</member>
+                        <clone prototype="restrictions">
+                            <clone prototype="enum">x, y, z, a, b, c</clone>
+                        </clone>
+                        <member id="visibility">required</member>
+                    </meta>
+                    <data>x</data>
+                </type>
+
+                <type id="target_forces" prototype="float_csv">
+                    <meta>
+                        <member id="description">Forces and torques to be applied. Must be the same number of values as for 'axes'.</member>
+                        <clone prototype="restrictions">
+                            <clone prototype="float_csv_min">-100.0, -100.0, -100.0, -10.0, -10.0, -10.0</clone>
+                            <clone prototype="float_csv_max">100.0, 100.0, 100.0, 10.0, 10.0, 10.0</clone>
+                        </clone>
+                        <member id="visibility">required</member>
+                    </meta>
+                    <data>0</data>
+                </type>
+
+                <type id="compliance" prototype="float_parameter">
+                    <meta>
+                        <member id="description">Force controller gain</member>
+                        <clone prototype="restrictions">
+                            <clone prototype="float_min">0.00001</clone>
+                            <clone prototype="float_max">0.1</clone>
+                        </clone>
+                        <member id="visibility">basic</member>
+                    </meta>
+                    <data>0.002</data>
+                </type>
+                <type id="corner_frequency" prototype="float_parameter">
+                    <meta>
+                        <member id="description">Force controller corner frequency</member>
+                        <clone prototype="restrictions">
+                            <clone prototype="float_min">1.0</clone>
+                            <clone prototype="float_max">50.0</clone>
+                        </clone>
+                        <member id="visibility">basic</member>
+                    </meta>
+                    <data>5.0</data>
+                </type>
+
+                <!-- Cylindrical Rotation -->
+                <type id="velocities" prototype="float_csv">
+                    <meta>
+                        <member id="description">Velocities in [m/s] resp. [rad/s]</member>
+                        <member id="visibility">basic</member>
+                    </meta>
+                    <data>0, 0.1, 0, 0, 0, 0</data>
+                </type>
+
+                <type id="distance" prototype="float_csv">
+                    <meta>
+                        <member id="description">Distance in [rad].</member>
+                        <member id="visibility">basic</member>
+                    </meta>
+                    <data>1.31</data>
+                </type>
+
+                <type id="distance_calc" prototype="float_csv">
+                    <meta>
+                        <member id="description">Distance in [rad] covered while calculatting pivot.</member>
+                        <member id="visibility">basic</member>
+                    </meta>
+                    <data>0.26</data>
+                </type>
+
+                <!-- Implementation details below: -->
+                <clone id="force" prototype="skill_apply_force">
+                    <member id="force_frame" reference_id="tool_frame"/>
+                    <member id="axes" reference_id="force_axes"/>
+                    <member id="target_forces" reference_id="target_forces"/>
+                    <member id="compliance" reference_id="compliance"/>
+                    <member id="corner_frequency" reference_id="corner_frequency"/>
+                </clone>
+                <member id="force.meta.visibility">expert</member>
+
+                <clone id="rotation" prototype="skill_sequence">
+                    <member id="skills">
+                        <clone prototype="skill_cylindrical_velocity">
+                            <member id="tool_frame" reference_id="tool_frame"/>
+                            <member id="target_frame">ref_frame</member>
+                            <member id="velocities" reference_id="velocities"/>
+                            <member id="monitors">
+                                <clone prototype="monitor_relative_angular_distance">
+                                    <member id="reference_frame">ref_frame</member>
+                                    <member id="frame" reference_id="tool_frame"/>
+                                    <member id="coordinates">c</member>
+                                    <member id="distances" reference_id="distance_calc"/>
+                                    <member id="operator">absolute_greater</member>
+                                </clone>
+                            </member>
+                            <member id="transitions">
+                                <clone prototype="transition">
+                                    <member id="event">succeeded</member>
+                                    <member id="target">cyl_2</member>
+                                </clone>
+                            </member>
+                        </clone>
+                        <clone id="cyl_2" prototype="skill_cylindrical_velocity">
+                            <member id="tool_frame" reference_id="tool_frame"/>
+                            <member id="target_frame">calc_center</member>
+                            <member id="velocities" reference_id="velocities"/>
+                            <member id="monitors">
+                                <clone prototype="monitor_relative_angular_distance">
+                                    <member id="reference_frame">calc_center</member>
+                                    <member id="frame" reference_id="tool_frame"/>
+                                    <member id="coordinates">c</member>
+                                    <member id="distances" reference_id="distance"/>
+                                    <member id="operator">absolute_greater</member>
+                                </clone>
+                            </member>
+                        </clone>
+                    </member>
+                    <member id="scripts">
+                        <clone prototype="script_temp_frame_offset">
+                            <member id="frame">ref_frame</member>
+                            <member id="parent" reference_id="robot.base_link"/>
+                            <member id="source" reference_id="source_frame"/>
+                            <member id="offset" reference_id="offset"/>
+                            <member id="tf_broadcast">true</member>
+                        </clone>
+                        <clone prototype="script_temp_frame_from_taubin">
+                            <member id="frame">calc_center</member>
+                            <member id="source">ref_frame</member>
+                            <member id="parent">ref_frame</member>
+                            <member id="tool_frame" reference_id="tool_frame"/>
+                            <member id="tf_broadcast">true</member>
+                        </clone>
+                        
+                    </member>
+                </clone>
+                <member id="rotation.meta.visibility">expert</member>
+
+                <member id="skills">
+                    <!-- <reference reference_id="force"/> -->
+                    <reference reference_id="rotation"/>
+                </member>
+                <member id="skills.meta.visibility">expert</member>
+
+                <member id="collections.meta.visibility">hidden</member>
+                <member id="loops.meta.visibility">hidden</member>
+                <member id="tasks.meta.visibility">hidden</member>
+            </data>
+        </type>
+    </models>
+</pitasc>

@@ -1,0 +1,64 @@
+<pitasc>
+    <models>
+        <include package="pitasc_library" file="models/pitasc.xml" />
+
+        <type id="monitor_relative_angular_distance" prototype="monitor">
+            <meta>
+                <member id="description">Triggers when a frame's relaive rotation around a reference frame exceeds a certain threshold.
+                    Every coordinate is handled individually. Triggers when true for every coordinate.
+                </member>
+                <member id="categories">geometry</member>
+                <member id="implementation">
+                    <clone prototype="orocos">
+                        <member id="package">pitasc_pivot_taubin_monitors</member>
+                        <member id="component">MonitorRelativeAngularDistance</member>
+                    </clone>
+                </member>
+                <member id="visibility">expert</member>
+            </meta>
+            <data>
+                <type id="reference_frame" prototype="frame">
+                    <meta>
+                        <member id="description">Static frame which the moving frame is rotating around.</member>
+                        <member id="visibility">required</member>
+                    </meta>
+                </type>
+
+                <type id="frame" prototype="frame">
+                    <meta>
+                        <member id="description">Moving frame</member>
+                        <member id="visibility">required</member>
+                    </meta>
+                </type>
+
+                <type id="coordinates" prototype="string_csv">
+                    <meta>
+                        <member id="description">Observed axes.</member>
+                            <clone prototype="restrictions">
+                                <clone prototype="enum">a, b, c</clone>
+                            </clone>
+                        <member id="visibility">required</member>
+                    </meta>
+                </type>
+
+                <type id="distances" prototype="float_csv">
+                    <meta>
+                        <member id="description">Distances threshold [rad]. Aligned to the `coordinates` member.</member>
+                        <member id="visibility">required</member>
+                        <clone prototype="restrictions">
+                            <clone prototype="float_csv_min">0, 0, 0</clone>
+                            <clone prototype="float_csv_max">6.28, 6.28, 6.28,</clone>
+                        </clone>
+                    </meta>
+                </type>
+                <type id="operator" prototype="operator">
+                    <meta>
+                        <member id="visibility">required</member>
+                    </meta>
+                </type>
+                <reference prototype="kinematic_graph" reference_id="configuration.kinematic_graph"/>
+                <member id="kinematic_graph.meta.visibility">hidden</member>
+            </data>
+        </type>
+    </models>
+</pitasc>

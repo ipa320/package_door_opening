@@ -1,0 +1,49 @@
+<pitasc>
+    <models>
+        <include package="pitasc_library" file="models/pitasc.xml" />
+
+        <type id="script_temp_frame_offset" prototype="script_kinematic_graph">
+            <meta>
+                <member id="description">Creates a temporary frame</member>
+                <member id="categories">frames</member>
+                <member id="implementation">
+                    <clone prototype="orocos">
+                        <member id="package">pitasc_pivot_taubin_scripts</member>
+                        <member id="component">ScriptTempFrameOffset</member>
+                    </clone>
+                </member>
+            </meta>
+            <data>
+                <type id="frame" prototype="string_parameter">
+                    <meta>
+                        <member id="description">Name of the frame to be created</member>
+                        <member id="visibility">required</member>
+                    </meta>
+                </type>
+
+                <type id="source" prototype="string_parameter">
+                    <meta>
+                        <member id="description">Name of the frame to be copied</member>
+                        <member id="visibility">required</member>
+                    </meta>
+                </type>
+
+                <type id="parent" prototype="string_parameter">
+                    <meta>
+                        <member id="description">Name of the parent frame to of 'frame'</member>
+                        <member id="visibility">required</member>
+                    </meta>
+                </type>
+
+                <type id="offset" prototype="float_csv">
+                    <meta>
+                        <member id="description">offset of the new frame relative to 'source'</member>
+                        <member id="visibility">basic</member>
+                    </meta>
+                    <data>0,0,0,0,0,0</data>
+                </type>
+            </data>
+        </type>
+
+    </models>
+</pitasc>

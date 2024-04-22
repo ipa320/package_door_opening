@@ -1,0 +1,28 @@
+<pitasc>
+    <models>
+        <include package="pitasc_library" file="models/pitasc.xml" />
+        <include package="pitasc_pivot_taubin" file="scripts/script_temp_frame_offset.xml" />
+
+        <type id= "script_temp_frame_from_taubin" prototype="script_temp_frame_offset">
+            <meta>
+                <member id="description">Creates a temporary frame by calculating the pivot point of a circular arch</member>
+                <member id="categories">frames</member>
+                <member id="implementation">
+                    <clone prototype="orocos">
+                        <member id="package">pitasc_pivot_taubin_scripts</member>
+                        <member id="component">ScriptTempFrameFromTaubin</member>
+                    </clone>
+                </member>
+            </meta>
+            <data>
+                <type id="tool_frame" prototype="string_parameter">
+                    <meta>
+                        <member id="description">Name of the frame to be messured</member>
+                        <member id="visibility">required</member>
+                    </meta>
+                </type>
+            </data>
+        </type>
+        
+    </models>
+</pitasc>
