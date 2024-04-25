@@ -142,12 +142,6 @@
                                     <member id="operator">absolute_greater</member>
                                 </clone>
                             </member>
-                            <member id="transitions">
-                                <clone prototype="transition">
-                                    <member id="event">succeeded</member>
-                                    <member id="target">cyl_2</member>
-                                </clone>
-                            </member>
                         </clone>
                         <clone id="cyl_2" prototype="skill_cylindrical_velocity">
                             <member id="tool_frame" reference_id="tool_frame"/>
