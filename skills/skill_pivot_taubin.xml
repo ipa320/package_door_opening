@@ -185,7 +185,7 @@
                 <member id="rotation.meta.visibility">expert</member>
 
                 <member id="skills">
-                    <!-- <reference reference_id="force"/> -->
+                    <reference reference_id="force"/>
                     <reference reference_id="rotation"/>
                 </member>
                 <member id="skills.meta.visibility">expert</member>
