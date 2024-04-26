@@ -117,6 +117,13 @@
                     <data>0.26</data>
                 </type>
 
+                <type id="operator" prototype="operator">
+                    <meta>
+                        <member id="visibility">required</member>
+                    </meta>
+                    <data>absolute_greater</data>
+                </type>
+
                 <!-- Implementation details below: -->
                 <clone id="force" prototype="skill_apply_force">
                     <member id="force_frame" reference_id="tool_frame"/>
@@ -139,7 +146,7 @@
                                     <member id="frame" reference_id="tool_frame"/>
                                     <member id="coordinates">c</member>
                                     <member id="distances" reference_id="distance_calc"/>
-                                    <member id="operator">absolute_greater</member>
+                                    <member id="operator" reference_id="operator"/>
                                 </clone>
                             </member>
                         </clone>
@@ -153,7 +160,7 @@
                                     <member id="frame" reference_id="tool_frame"/>
                                     <member id="coordinates">c</member>
                                     <member id="distances" reference_id="distance"/>
-                                    <member id="operator">absolute_greater</member>
+                                    <member id="operator" reference_id="operator"/>
                                 </clone>
                             </member>
                         </clone>
