@@ -124,6 +124,18 @@
                     <data>absolute_greater</data>
                 </type>
 
+                <type id="monitor_dead_zone" prototype="float_parameter">
+                    <meta>
+                        <member id="description">
+                            Distance, in [rad], of zone around the starting position the monitor ignores. Is needed
+                            to ignore potential overflow of the distance parameters at the start of a rotation 
+                            caused by small imprecision of the robot.
+                        </member>
+                        <member id="visibility">expert</member>
+                    </meta>
+                    <data>0.001</data>
+                </type>
+
                 <!-- Implementation details below: -->
                 <clone id="force" prototype="skill_apply_force">
                     <member id="force_frame" reference_id="tool_frame"/>
@@ -147,6 +159,7 @@
                                     <member id="coordinates">c</member>
                                     <member id="distances" reference_id="distance_calc"/>
                                     <member id="operator" reference_id="operator"/>
+                                    <member id="dead_zone" reference_id="monitor_dead_zone"/>
                                 </clone>
                             </member>
                         </clone>
@@ -161,6 +174,7 @@
                                     <member id="coordinates">c</member>
                                     <member id="distances" reference_id="distance"/>
                                     <member id="operator" reference_id="operator"/>
+                                    <member id="dead_zone" reference_id="monitor_dead_zone"/>
                                 </clone>
                             </member>
                         </clone>

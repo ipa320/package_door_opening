@@ -56,6 +56,19 @@
                         <member id="visibility">required</member>
                     </meta>
                 </type>
+
+                <type id="dead_zone" prototype="float_parameter">
+                    <meta>
+                        <member id="description">
+                            Distance, in [rad], of zone around the starting position the monitor ignores. Is needed
+                            to ignore potential overflow of the distance parameters at the start of a rotation 
+                            caused by small imprecision of the robot.
+                        </member>
+                        <member id="visibility">expert</member>
+                    </meta>
+                    <data>0.001</data>
+                </type>
+
                 <reference prototype="kinematic_graph" reference_id="configuration.kinematic_graph"/>
                 <member id="kinematic_graph.meta.visibility">hidden</member>
             </data>

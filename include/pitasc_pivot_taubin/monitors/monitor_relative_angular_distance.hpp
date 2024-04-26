@@ -23,6 +23,7 @@ protected:
     vector<Operator<double>> operators_;
 
     vector<double> distances_;
+    double dead_zone_;
 
     KinematicTree* tree_{nullptr};
     map<string, std::function<double(const KDL::Frame&)>> map_coordinate_;

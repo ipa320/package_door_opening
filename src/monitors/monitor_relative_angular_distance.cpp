@@ -12,6 +12,7 @@ bool MonitorRelativeAngularDistance::init(Dict& params)
     // Parameters
     extract(params["reference_frame"], ref_frame_);
     extract(params["frame"], observed_frame_);
+    extract(params["dead_zone"], dead_zone_);
 
     try {
         extract(params["distances"], distances_);
@@ -101,7 +102,7 @@ void MonitorRelativeAngularDistance::onUpdate(const Tick& /*unused*/)
             }
 
             //prevents jump between min/max value caused by inaccuracies near 0°/360°
-            if (distance < 0.001 || distance > (2 * M_PI - 0.001) ) {return;}
+            if (distance < dead_zone_ || distance > (2 * M_PI - dead_zone_) ) {return;}
 
             auto result = operators_[i].check(distance);
             pi_spam("Coordinate: {}, Operator: {}({}, {}), Result: {}\n", coordinates_[i], operator_name_,
