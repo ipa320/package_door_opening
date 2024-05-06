@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>pitasc_pivot_taubin</name>
+  <name>package_door_opening</name>
   <version>1.0.0</version>
-  <description>The pitasc_pivot_taubin package</description>
+  <description>The package_door_opening package</description>
 
   <maintainer email="marcel.jenisch@ipa.fraunhofer.de">Marcel Jenisch</maintainer>
 
@@ -18,5 +18,4 @@
 
   <export>
   </export>
-
 </package>

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(pitasc_pivot_taubin)
+project(package_door_opening)
 
 add_compile_options(-std=c++17)
 

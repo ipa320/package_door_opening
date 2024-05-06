@@ -10,8 +10,8 @@
         <!-- Include the skills -->
         <include package="pitasc_library" file="models/skills.xml"/>
 
-        <include package="pitasc_pivot_taubin" file="monitors/monitor_relative_angular_distance.xml"/>
-        <include package="pitasc_pivot_taubin" file="scripts/script_temp_frame_from_taubin.xml"/>   
+        <include package="package_door_opening" file="monitors/monitor_relative_angular_distance.xml"/>
+        <include package="package_door_opening" file="scripts/script_temp_frame_from_taubin.xml"/>   
         
     </models>
 

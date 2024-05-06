@@ -8,7 +8,7 @@
         <include package="pitasc_library" file="universal_robots/ur.xml"/>
 
         <!-- Include the skills -->
-        <include package="pitasc_pivot_taubin" file="skills/skill_pivot_taubin.xml"/>  
+        <include package="package_door_opening" file="skills/skill_pivot_taubin.xml"/>  
     </models>
 
     <!-- Create a project -->

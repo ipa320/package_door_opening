@@ -1,7 +1,7 @@
 <pitasc>
     <models>
         <include package="pitasc_library" file="models/pitasc.xml" />
-        <include package="pitasc_pivot_taubin" file="scripts/script_temp_frame_offset.xml" />
+        <include package="package_door_opening" file="scripts/script_temp_frame_offset.xml" />
 
         <type id= "script_temp_frame_from_taubin" prototype="script_temp_frame_offset">
             <meta>
@@ -9,7 +9,7 @@
                 <member id="categories">frames</member>
                 <member id="implementation">
                     <clone prototype="orocos">
-                        <member id="package">pitasc_pivot_taubin_scripts</member>
+                        <member id="package">package_door_opening_scripts</member>
                         <member id="component">ScriptTempFrameFromTaubin</member>
                     </clone>
                 </member>

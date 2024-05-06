@@ -10,7 +10,7 @@
         <!-- Include the skills -->
         <include package="pitasc_library" file="models/skills.xml"/>
 
-        <include package="pitasc_pivot_taubin" file="scripts/script_temp_frame_offset.xml"/>   
+        <include package="package_door_opening" file="scripts/script_temp_frame_offset.xml"/>   
         
     </models>
 

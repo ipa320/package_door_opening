@@ -4,9 +4,9 @@
         <include package="pitasc_library" file="models/coordination.xml"/>
         <include package="pitasc_library" file="skills/cylindrical/skill_cylindrical_velocity.xml"/>
 
-        <include package="pitasc_pivot_taubin" file="monitors/monitor_relative_angular_distance.xml"/>
-        <include package="pitasc_pivot_taubin" file="scripts/script_temp_frame_offset.xml"/>  
-        <include package="pitasc_pivot_taubin" file="scripts/script_temp_frame_from_taubin.xml"/>  
+        <include package="package_door_opening" file="monitors/monitor_relative_angular_distance.xml"/>
+        <include package="package_door_opening" file="scripts/script_temp_frame_offset.xml"/>  
+        <include package="package_door_opening" file="scripts/script_temp_frame_from_taubin.xml"/>  
 
         <type id="skill_pivot_taubin" prototype="skill_concurrency">
             <meta>

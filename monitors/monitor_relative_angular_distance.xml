@@ -10,7 +10,7 @@
                 <member id="categories">geometry</member>
                 <member id="implementation">
                     <clone prototype="orocos">
-                        <member id="package">pitasc_pivot_taubin_monitors</member>
+                        <member id="package">package_door_opening_monitors</member>
                         <member id="component">MonitorRelativeAngularDistance</member>
                     </clone>
                 </member>
