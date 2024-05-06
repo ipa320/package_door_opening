@@ -1,4 +1,4 @@
-#include "pitasc_pivot_taubin/monitors/monitor_relative_angular_distance.hpp"
+#include "package_door_opening/monitors/monitor_relative_angular_distance.hpp"
 
 MonitorRelativeAngularDistance::MonitorRelativeAngularDistance(const string& name)
     : Monitor(name)
