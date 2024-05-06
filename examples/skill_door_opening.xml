@@ -8,7 +8,7 @@
         <include package="pitasc_library" file="universal_robots/ur.xml"/>
 
         <!-- Include the skills -->
-        <include package="package_door_opening" file="skills/skill_pivot_taubin.xml"/>  
+        <include package="package_door_opening" file="skills/skill_door_opening.xml"/>  
     </models>
 
     <!-- Create a project -->
@@ -45,7 +45,7 @@
                         <member id="target_offsets">0.0, -0.15, 0.0, 0.0, 0, 0.0</member>
                     </clone>
 
-                    <clone prototype="skill_pivot_taubin">
+                    <clone prototype="skill_door_opening">
                         <member id="tool_frame">tool</member>
                         <member id="parent_frame" reference_id="robot.base_link"/>
                         <member id="source_frame">target1</member>

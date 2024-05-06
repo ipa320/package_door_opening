@@ -8,7 +8,7 @@
         <include package="package_door_opening" file="scripts/script_temp_frame_offset.xml"/>  
         <include package="package_door_opening" file="scripts/script_temp_frame_from_taubin.xml"/>  
 
-        <type id="skill_pivot_taubin" prototype="skill_concurrency">
+        <type id="skill_door_opening" prototype="skill_concurrency">
             <meta>
                 <member id="description">Rotates around pivot while adjusting it's position after initial arch</member>
                 <member id="visibility">basic</member>
