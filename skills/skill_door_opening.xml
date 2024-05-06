@@ -6,7 +6,7 @@
 
         <include package="package_door_opening" file="monitors/monitor_relative_angular_distance.xml"/>
         <include package="package_door_opening" file="scripts/script_temp_frame_offset.xml"/>  
-        <include package="package_door_opening" file="scripts/script_temp_frame_from_taubin.xml"/>  
+        <include package="package_door_opening" file="scripts/script_temp_frame_center_of_circle.xml"/>  
 
         <type id="skill_door_opening" prototype="skill_concurrency">
             <meta>
@@ -187,7 +187,7 @@
                             <member id="offset" reference_id="offset"/>
                             <member id="tf_broadcast">true</member>
                         </clone>
-                        <clone prototype="script_temp_frame_from_taubin">
+                        <clone prototype="script_temp_frame_center_of_circle">
                             <member id="frame">calc_center</member>
                             <member id="source">ref_frame</member>
                             <member id="parent">ref_frame</member>

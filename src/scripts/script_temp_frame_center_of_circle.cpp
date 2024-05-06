@@ -1,29 +1,29 @@
-#include "package_door_opening/scripts/script_temp_frame_from_taubin.hpp"
+#include "package_door_opening/scripts/script_temp_frame_center_of_circle.hpp"
 
-ScriptTempFrameFromTaubin::ScriptTempFrameFromTaubin (const string& name)
+ScriptTempFrameCenterOfCircle::ScriptTempFrameCenterOfCircle (const string& name)
     : ScriptTempFrameOffset(name)
 {
 }
 
-bool ScriptTempFrameFromTaubin::init(Dict& params)
+bool ScriptTempFrameCenterOfCircle::init(Dict& params)
 {
     tool_ = extract_type(params["tool_frame"], string);
     setDependencies({});
     return ScriptTempFrameOffset::init(params);
 }
 
-bool ScriptTempFrameFromTaubin::onStart()
+bool ScriptTempFrameCenterOfCircle::onStart()
 {
     return ScriptTempFrameOffset::onStart();
 }
 
-void ScriptTempFrameFromTaubin::onUpdate(const Tick& tick)
+void ScriptTempFrameCenterOfCircle::onUpdate(const Tick& tick)
 {
     KDL::Frame frame_parent_to_tool;
 
     //lookup tool koordinates
     if (!tree_->lookup(parent_, tool_, frame_parent_to_tool)) {
-        throw std::runtime_error("TempFrameFromTaubin: Lookup from '" + parent_ + "' to '" + tool_
+        throw std::runtime_error("ScriptTempFrameCenterOfCircle: Lookup from '" + parent_ + "' to '" + tool_
                                  + "' not possible");
     }
 
@@ -110,4 +110,4 @@ void ScriptTempFrameFromTaubin::onUpdate(const Tick& tick)
     ScriptTempFrameOffset::onUpdate(tick);
 }
 
-RUNTIME_COMPONENT(ScriptTempFrameFromTaubin)
+RUNTIME_COMPONENT(ScriptTempFrameCenterOfCircle)

@@ -41,7 +41,7 @@ target_link_libraries(${PROJECT_NAME}_monitors
 
 add_library(${PROJECT_NAME}_scripts
     src/scripts/script_temp_frame_offset.cpp
-    src/scripts/script_temp_frame_from_taubin.cpp
+    src/scripts/script_temp_frame_center_of_circle.cpp
 )
 target_link_libraries(${PROJECT_NAME}_scripts
     ${catkin_LIBRARIES}
