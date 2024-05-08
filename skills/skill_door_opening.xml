@@ -117,13 +117,6 @@
                     <data>0.26</data>
                 </type>
 
-                <type id="operator" prototype="operator">
-                    <meta>
-                        <member id="visibility">required</member>
-                    </meta>
-                    <data>absolute_greater</data>
-                </type>
-
                 <type id="monitor_dead_zone" prototype="float_parameter">
                     <meta>
                         <member id="description">
@@ -158,7 +151,7 @@
                                     <member id="frame" reference_id="tool_frame"/>
                                     <member id="coordinates">c</member>
                                     <member id="distances" reference_id="distance_calc"/>
-                                    <member id="operator" reference_id="operator"/>
+                                    <member id="operator">crossing_threshold</member>
                                     <member id="dead_zone" reference_id="monitor_dead_zone"/>
                                 </clone>
                             </member>
@@ -173,7 +166,7 @@
                                     <member id="frame" reference_id="tool_frame"/>
                                     <member id="coordinates">c</member>
                                     <member id="distances" reference_id="distance"/>
-                                    <member id="operator" reference_id="operator"/>
+                                    <member id="operator">crossing_threshold</member>
                                     <member id="dead_zone" reference_id="monitor_dead_zone"/>
                                 </clone>
                             </member>
