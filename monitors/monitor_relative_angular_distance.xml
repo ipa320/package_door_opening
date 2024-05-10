@@ -4,8 +4,10 @@
 
         <type id="monitor_relative_angular_distance" prototype="monitor">
             <meta>
-                <member id="description">Triggers when a frame's relaive rotation around a reference frame exceeds a certain threshold.
-                    Every coordinate is handled individually. Triggers when true for every coordinate.
+                <member id="description">
+                    Triggers when a frame's relative rotation around the axes of a reference frame exceeds a certain threshold.
+                    Only the position, and not the rotation, of the rotating frame, is relevant for the monitor.
+                    Every coordinate is handled individually. Triggers if true for every coordinate.
                 </member>
                 <member id="categories">geometry</member>
                 <member id="implementation">
