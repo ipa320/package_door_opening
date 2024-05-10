@@ -5,7 +5,12 @@
 
         <type id= "script_temp_frame_center_of_circle" prototype="script_temp_frame_offset">
             <meta>
-                <member id="description">Creates a temporary frame by calculating the pivot point of a circular arch</member>
+                <member id="description">Creates a temporary frame and moves it to the center point of a frame that moves in a circular path.
+                    The z-axis of the source frame plus offset is assumed to be perpendicular to the plane of rotation.
+                    Uses the x, y positional values of the observed frame relative to the source frame plus offset
+                    to calculate the x and y position of the temp frame. The z position is set to 0.
+                    Uses the Taubin Circle Fit Method for finding the center point.
+                    The frame's position will be updated as long as the script is active.</member>
                 <member id="categories">frames</member>
                 <member id="implementation">
                     <clone prototype="orocos">
