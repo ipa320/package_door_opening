@@ -4,7 +4,12 @@
 
         <type id="script_temp_frame_offset" prototype="script_kinematic_graph">
             <meta>
-                <member id="description">Creates a temporary frame</member>
+                <member id="description">
+                    Creates a temporary frame by copying a 'source' frame and adding an offset to it.
+                    The frame lives as long as the parent-skill is active.
+                    (Currently: Frame does not get deleted after the parent skill becomes inactive.
+                    Absolute coordinates stop being broadcast, but relative coordinates continue to be broadcast)
+                </member>
                 <member id="categories">frames</member>
                 <member id="implementation">
                     <clone prototype="orocos">
