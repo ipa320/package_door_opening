@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="task_board">
+    <link name="task_board">
+        <visual>
+            <origin xyz="0.145 0.075 0.08" rpy="0 0 ${pi}"/>
+            <geometry>
+                <mesh filename="package://package_door_opening/resources/meshes/task_board_v2.stl"/>
+            </geometry>
+        </visual>
+    </link>
+</robot>
